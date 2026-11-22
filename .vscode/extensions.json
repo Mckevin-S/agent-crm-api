@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "vscjava.vscode-java-pack",
+    "vmware.vscode-spring-boot",
+    "cucumberopen.cucumber-official",
+    "angular.ng-template",
+    "dbaeumer.vscode-eslint",
+    "ms-playwright.playwright",
+    "editorconfig.editorconfig"
+  ]
+}
