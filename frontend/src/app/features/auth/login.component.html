@@ -1,0 +1,60 @@
+<div class="layout">
+  <aside class="brand">
+    <app-logo />
+    <div class="pitch">
+      <h1>Chaque client, <em>au bon moment.</em></h1>
+      <p>Une vue complète de vos clients : contrats, sinistres et échanges réunis sur une même fiche. Des recommandations
+        vous signalent les renouvellements à préparer, les dossiers qui traînent et les opportunités à saisir.</p>
+    </div>
+    <div class="preview" aria-hidden="true">
+      <div class="preview-head"><span class="dot"></span><span class="line w60"></span></div>
+      <div class="preview-row"><span class="chip high">Haute</span><span class="line w70"></span></div>
+      <div class="preview-row"><span class="chip medium">Moyenne</span><span class="line w50"></span></div>
+      <div class="preview-row"><span class="chip medium">Moyenne</span><span class="line w80"></span></div>
+      <div class="preview-row"><span class="chip low">Basse</span><span class="line w40"></span></div>
+    </div>
+    <span class="credit">Projet de démonstration · Spring Boot 3, architecture hexagonale &amp; Angular 17</span>
+  </aside>
+
+  <main class="form-side">
+    <div class="form-wrap">
+      <h2>Connexion</h2>
+      <p class="muted">Accédez à votre portefeuille clients.</p>
+
+      <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+        <mat-form-field appearance="outline">
+          <mat-label>E-mail</mat-label>
+          <input matInput type="email" formControlName="email" autocomplete="email" data-testid="email" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Mot de passe</mat-label>
+          <input matInput [type]="showPassword() ? 'text' : 'password'" formControlName="password"
+                 autocomplete="current-password" data-testid="password" />
+          <button mat-icon-button matSuffix type="button" (click)="showPassword.set(!showPassword())"
+                  [attr.aria-label]="showPassword() ? 'Masquer le mot de passe' : 'Afficher le mot de passe'">
+            <mat-icon>{{ showPassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+        </mat-form-field>
+        @if (error()) {
+          <p class="error" role="alert">{{ error() }}</p>
+        }
+        <button mat-flat-button color="primary" class="submit" type="submit" [disabled]="loading()" data-testid="login">
+          {{ loading() ? 'Connexion…' : 'Se connecter' }}
+        </button>
+      </form>
+
+      <section class="demo" aria-labelledby="demo-title">
+        <h3 id="demo-title"><mat-icon>science</mat-icon> Explorer la démo</h3>
+        <p class="muted">Une agence de trois personnes et 14 clients sont préchargés. Choisissez un profil :</p>
+        <div class="accounts">
+          @for (account of demoAccounts; track account.email) {
+            <button type="button" class="account" (click)="useDemo(account)" [attr.data-testid]="'demo-' + account.email">
+              <strong>{{ account.role }}</strong>
+              <span>{{ account.name }}</span>
+            </button>
+          }
+        </div>
+      </section>
+    </div>
+  </main>
+</div>

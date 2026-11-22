@@ -1,0 +1,504 @@
+{
+ "clients": [
+  {
+   "num_client": "C-10234",
+   "civilite": "Mme",
+   "nom": "Martin",
+   "prenom": "Claire",
+   "date_naissance": "1986-04-12",
+   "email": "claire.martin@exemple.fr",
+   "telephone": "06 89 23 24 23",
+   "ville": "Lille",
+   "code_postal": "59000",
+   "segment": "PART",
+   "client_depuis": "2014-03-01"
+  },
+  {
+   "num_client": "C-10235",
+   "civilite": "M.",
+   "nom": "Dubois",
+   "prenom": "Antoine",
+   "date_naissance": "1979-09-30",
+   "email": "antoine.dubois@exemple.fr",
+   "telephone": "06 53 42 82 12",
+   "ville": "Roubaix",
+   "code_postal": "59100",
+   "segment": "PART",
+   "client_depuis": "2009-06-15"
+  },
+  {
+   "num_client": "C-10236",
+   "civilite": "Mme",
+   "nom": "Lefebvre",
+   "prenom": "Sarah",
+   "date_naissance": "1992-01-22",
+   "email": "sarah.lefebvre@exemple.fr",
+   "telephone": "06 56 10 27 99",
+   "ville": "Villeneuve-d'Ascq",
+   "code_postal": "59650",
+   "segment": "PART",
+   "client_depuis": "2021-02-01"
+  },
+  {
+   "num_client": "C-10237",
+   "civilite": "M.",
+   "nom": "Petit",
+   "prenom": "Julien",
+   "date_naissance": "1984-07-05",
+   "email": "julien.petit@exemple.fr",
+   "telephone": "06 45 86 83 29",
+   "ville": "Tourcoing",
+   "code_postal": "59200",
+   "segment": "PART",
+   "client_depuis": "2016-11-10"
+  },
+  {
+   "num_client": "C-10238",
+   "civilite": "Mme",
+   "nom": "Moreau",
+   "prenom": "Inès",
+   "date_naissance": "1975-12-02",
+   "email": "ines.moreau@exemple.fr",
+   "telephone": "06 27 74 67 85",
+   "ville": "Marcq-en-Barœul",
+   "code_postal": "59700",
+   "segment": "PART",
+   "client_depuis": "2005-05-20"
+  },
+  {
+   "num_client": "C-10239",
+   "civilite": "M.",
+   "nom": "Garnier",
+   "prenom": "Hugo",
+   "date_naissance": "1990-03-18",
+   "email": "hugo.garnier@exemple.fr",
+   "telephone": "06 37 78 15 79",
+   "ville": "Lille",
+   "code_postal": "59000",
+   "segment": "PART",
+   "client_depuis": "2019-09-01"
+  },
+  {
+   "num_client": "C-10240",
+   "civilite": "Mme",
+   "nom": "Roux",
+   "prenom": "Camille",
+   "date_naissance": "1968-08-25",
+   "email": "camille.roux@exemple.fr",
+   "telephone": "06 36 41 50 58",
+   "ville": "Lambersart",
+   "code_postal": "59130",
+   "segment": "PART",
+   "client_depuis": "2001-01-12"
+  },
+  {
+   "num_client": "C-10241",
+   "civilite": "M.",
+   "nom": "Fournier",
+   "prenom": "Thomas",
+   "date_naissance": "1988-11-11",
+   "email": "thomas.fournier@exemple.fr",
+   "telephone": "06 86 10 99 25",
+   "ville": "Lille",
+   "code_postal": "59000",
+   "segment": "PRO",
+   "client_depuis": "2018-04-03"
+  },
+  {
+   "num_client": "C-10242",
+   "civilite": "Mme",
+   "nom": "Girard",
+   "prenom": "Léa",
+   "date_naissance": "1995-05-30",
+   "email": "lea.girard@exemple.fr",
+   "telephone": "06 53 34 71 15",
+   "ville": "Wasquehal",
+   "code_postal": "59290",
+   "segment": "PART",
+   "client_depuis": "2023-07-01"
+  },
+  {
+   "num_client": "C-10243",
+   "civilite": "M.",
+   "nom": "Bonnet",
+   "prenom": "Nicolas",
+   "date_naissance": "1981-02-14",
+   "email": "nicolas.bonnet@exemple.fr",
+   "telephone": "06 87 49 99 38",
+   "ville": "Croix",
+   "code_postal": "59170",
+   "segment": "PART",
+   "client_depuis": "2012-10-05"
+  },
+  {
+   "num_client": "C-10244",
+   "civilite": "Mme",
+   "nom": "Lambert",
+   "prenom": "Chloé",
+   "date_naissance": "1999-10-09",
+   "email": "chloe.lambert@exemple.fr",
+   "telephone": "06 85 62 99 17",
+   "ville": "Lille",
+   "code_postal": "59000",
+   "segment": "PART",
+   "client_depuis": "2025-01-15"
+  },
+  {
+   "num_client": "C-10245",
+   "civilite": "M.",
+   "nom": "Faure",
+   "prenom": "Mathieu",
+   "date_naissance": "1972-06-21",
+   "email": "mathieu.faure@exemple.fr",
+   "telephone": "06 30 94 16 37",
+   "ville": "Hem",
+   "code_postal": "59510",
+   "segment": "PRO",
+   "client_depuis": "2010-03-30"
+  },
+  {
+   "num_client": "C-10246",
+   "civilite": "Mme",
+   "nom": "Mercier",
+   "prenom": "Emma",
+   "date_naissance": "1987-04-03",
+   "email": "emma.mercier@exemple.fr",
+   "telephone": "06 22 76 51 23",
+   "ville": "Lille",
+   "code_postal": "59000",
+   "segment": "PART",
+   "client_depuis": "2017-08-22"
+  },
+  {
+   "num_client": "C-10247",
+   "civilite": "M.",
+   "nom": "Blanc",
+   "prenom": "Louis",
+   "date_naissance": "1958-01-28",
+   "email": "louis.blanc@exemple.fr",
+   "telephone": "06 15 22 80 27",
+   "ville": "Mons-en-Barœul",
+   "code_postal": "59370",
+   "segment": "PART",
+   "client_depuis": "1998-02-02"
+  }
+ ],
+ "contrats": [
+  {
+   "num_contrat": "AUT-558201",
+   "num_client": "C-10234",
+   "produit": "AUT",
+   "libelle": "Auto Confort – Peugeot 3008",
+   "statut": "EN_VIGUEUR",
+   "prime_annuelle": 712.4,
+   "date_effet_jours": -1400,
+   "echeance_jours": 12
+  },
+  {
+   "num_contrat": "SAN-220981",
+   "num_client": "C-10234",
+   "produit": "SAN",
+   "libelle": "Santé Famille",
+   "statut": "EN_VIGUEUR",
+   "prime_annuelle": 1386.0,
+   "date_effet_jours": -2100,
+   "echeance_jours": 140
+  },
+  {
+   "num_contrat": "AUT-558377",
+   "num_client": "C-10235",
+   "produit": "AUT",
+   "libelle": "Auto Essentiel – Renault Clio",
+   "statut": "EN_VIGUEUR",
+   "prime_annuelle": 498.9,
+   "date_effet_jours": -3000,
+   "echeance_jours": 200
+  },
+  {
+   "num_contrat": "MRH-114502",
+   "num_client": "C-10235",
+   "produit": "MRH",
+   "libelle": "Habitation – Maison 5 pièces",
+   "statut": "EN_VIGUEUR",
+   "prime_annuelle": 362.0,
+   "date_effet_jours": -3000,
+   "echeance_jours": 34
+  },
+  {
+   "num_contrat": "AUT-559010",
+   "num_client": "C-10236",
+   "produit": "AUT",
+   "libelle": "Auto Jeune Conducteur – Citroën C3",
+   "statut": "EN_VIGUEUR",
+   "prime_annuelle": 964.1,
+   "date_effet_jours": -650,
+   "echeance_jours": 80
+  },
+  {
+   "num_contrat": "MRH-115880",
+   "num_client": "C-10237",
+   "produit": "MRH",
+   "libelle": "Habitation – Appartement 3 pièces",
+   "statut": "SUSPENDU",
+   "prime_annuelle": 254.0,
+   "date_effet_jours": -2500,
+   "echeance_jours": 95
+  },
+  {
+   "num_contrat": "AUT-559344",
+   "num_client": "C-10237",
+   "produit": "AUT",
+   "libelle": "Auto Confort – Toyota Corolla",
+   "statut": "EN_VIGUEUR",
+   "prime_annuelle": 655.0,
+   "date_effet_jours": -2500,
+   "echeance_jours": 170
+  },
+  {
+   "num_contrat": "MRH-116020",
+   "num_client": "C-10238",
+   "produit": "MRH",
+   "libelle": "Habitation – Maison 6 pièces",
+   "statut": "EN_VIGUEUR",
+   "prime_annuelle": 489.0,
+   "date_effet_jours": -6000,
+   "echeance_jours": 250
+  },
+  {
+   "num_contrat": "PRV-330145",
+   "num_client": "C-10238",
+   "produit": "PRV",
+   "libelle": "Prévoyance Sérénité",
+   "statut": "EN_VIGUEUR",
+   "prime_annuelle": 540.0,
+   "date_effet_jours": -4000,
+   "echeance_jours": 250
+  },
+  {
+   "num_contrat": "EPA-440012",
+   "num_client": "C-10238",
+   "produit": "EPA",
+   "libelle": "Épargne Retraite",
+   "statut": "EN_VIGUEUR",
+   "prime_annuelle": 2400.0,
+   "date_effet_jours": -3000,
+   "echeance_jours": 300
+  },
+  {
+   "num_contrat": "SAN-221477",
+   "num_client": "C-10239",
+   "produit": "SAN",
+   "libelle": "Santé Solo",
+   "statut": "EN_VIGUEUR",
+   "prime_annuelle": 612.0,
+   "date_effet_jours": -1000,
+   "echeance_jours": 7
+  },
+  {
+   "num_contrat": "MRH-116431",
+   "num_client": "C-10240",
+   "produit": "MRH",
+   "libelle": "Habitation – Maison 4 pièces",
+   "statut": "EN_VIGUEUR",
+   "prime_annuelle": 398.0,
+   "date_effet_jours": -8000,
+   "echeance_jours": 120
+  },
+  {
+   "num_contrat": "AUT-560112",
+   "num_client": "C-10240",
+   "produit": "AUT",
+   "libelle": "Auto Confort – Volkswagen Golf",
+   "statut": "RESILIE",
+   "prime_annuelle": 0.0,
+   "date_effet_jours": -5000,
+   "echeance_jours": -60
+  },
+  {
+   "num_contrat": "PRO-901233",
+   "num_client": "C-10241",
+   "produit": "MRH",
+   "libelle": "Multirisque Professionnelle – Boulangerie",
+   "statut": "EN_VIGUEUR",
+   "prime_annuelle": 1890.0,
+   "date_effet_jours": -1600,
+   "echeance_jours": 40
+  },
+  {
+   "num_contrat": "AUT-560450",
+   "num_client": "C-10241",
+   "produit": "AUT",
+   "libelle": "Flotte – 2 utilitaires",
+   "statut": "EN_VIGUEUR",
+   "prime_annuelle": 2210.0,
+   "date_effet_jours": -1600,
+   "echeance_jours": 40
+  },
+  {
+   "num_contrat": "AUT-560811",
+   "num_client": "C-10242",
+   "produit": "AUT",
+   "libelle": "Auto Essentiel – Fiat 500",
+   "statut": "EN_VIGUEUR",
+   "prime_annuelle": 540.0,
+   "date_effet_jours": -500,
+   "echeance_jours": 230
+  },
+  {
+   "num_contrat": "MRH-117002",
+   "num_client": "C-10243",
+   "produit": "MRH",
+   "libelle": "Habitation – Appartement 4 pièces",
+   "statut": "EN_VIGUEUR",
+   "prime_annuelle": 310.0,
+   "date_effet_jours": -4400,
+   "echeance_jours": 60
+  },
+  {
+   "num_contrat": "SAN-222010",
+   "num_client": "C-10243",
+   "produit": "SAN",
+   "libelle": "Santé Famille",
+   "statut": "EN_VIGUEUR",
+   "prime_annuelle": 1622.0,
+   "date_effet_jours": -4400,
+   "echeance_jours": 60
+  },
+  {
+   "num_contrat": "AUT-561003",
+   "num_client": "C-10243",
+   "produit": "AUT",
+   "libelle": "Auto Confort – Skoda Octavia",
+   "statut": "EN_VIGUEUR",
+   "prime_annuelle": 620.0,
+   "date_effet_jours": -4400,
+   "echeance_jours": 60
+  },
+  {
+   "num_contrat": "MRH-117350",
+   "num_client": "C-10244",
+   "produit": "MRH",
+   "libelle": "Habitation – Studio étudiant",
+   "statut": "EN_VIGUEUR",
+   "prime_annuelle": 96.0,
+   "date_effet_jours": -300,
+   "echeance_jours": 65
+  },
+  {
+   "num_contrat": "PRO-902010",
+   "num_client": "C-10245",
+   "produit": "MRH",
+   "libelle": "Multirisque Professionnelle – Cabinet d'architecte",
+   "statut": "EN_VIGUEUR",
+   "prime_annuelle": 980.0,
+   "date_effet_jours": -5000,
+   "echeance_jours": 180
+  },
+  {
+   "num_contrat": "PRV-331002",
+   "num_client": "C-10245",
+   "produit": "PRV",
+   "libelle": "Prévoyance Travailleur non salarié",
+   "statut": "EN_VIGUEUR",
+   "prime_annuelle": 1450.0,
+   "date_effet_jours": -5000,
+   "echeance_jours": 180
+  },
+  {
+   "num_contrat": "AUT-561220",
+   "num_client": "C-10246",
+   "produit": "AUT",
+   "libelle": "Auto Confort – Tesla Model 3",
+   "statut": "EN_VIGUEUR",
+   "prime_annuelle": 1120.0,
+   "date_effet_jours": -1200,
+   "echeance_jours": 26
+  },
+  {
+   "num_contrat": "MRH-117801",
+   "num_client": "C-10246",
+   "produit": "MRH",
+   "libelle": "Habitation – Appartement 2 pièces",
+   "statut": "EN_VIGUEUR",
+   "prime_annuelle": 230.0,
+   "date_effet_jours": -1200,
+   "echeance_jours": 26
+  },
+  {
+   "num_contrat": "EPA-440310",
+   "num_client": "C-10247",
+   "produit": "EPA",
+   "libelle": "Épargne Retraite",
+   "statut": "EN_VIGUEUR",
+   "prime_annuelle": 3600.0,
+   "date_effet_jours": -9000,
+   "echeance_jours": 320
+  },
+  {
+   "num_contrat": "SAN-222431",
+   "num_client": "C-10247",
+   "produit": "SAN",
+   "libelle": "Santé Senior",
+   "statut": "EN_VIGUEUR",
+   "prime_annuelle": 2380.0,
+   "date_effet_jours": -9000,
+   "echeance_jours": 320
+  }
+ ],
+ "sinistres": [
+  {
+   "num_sinistre": "SIN-77120",
+   "num_contrat": "AUT-558201",
+   "num_client": "C-10234",
+   "nature": "Bris de glace",
+   "statut": "CLOS",
+   "ouvert_il_y_a_jours": 95,
+   "montant_estime": 420.0
+  },
+  {
+   "num_sinistre": "SIN-77245",
+   "num_contrat": "MRH-114502",
+   "num_client": "C-10235",
+   "nature": "Dégât des eaux",
+   "statut": "EN_COURS",
+   "ouvert_il_y_a_jours": 47,
+   "montant_estime": 2350.0
+  },
+  {
+   "num_sinistre": "SIN-77301",
+   "num_contrat": "SAN-221477",
+   "num_client": "C-10239",
+   "nature": "Hospitalisation",
+   "statut": "OUVERT",
+   "ouvert_il_y_a_jours": 62,
+   "montant_estime": 3800.0
+  },
+  {
+   "num_sinistre": "SIN-77399",
+   "num_contrat": "PRO-901233",
+   "num_client": "C-10241",
+   "nature": "Panne frigorifique",
+   "statut": "EN_COURS",
+   "ouvert_il_y_a_jours": 21,
+   "montant_estime": 5400.0
+  },
+  {
+   "num_sinistre": "SIN-77410",
+   "num_contrat": "PRO-902010",
+   "num_client": "C-10245",
+   "nature": "Vol de matériel",
+   "statut": "CLOS",
+   "ouvert_il_y_a_jours": 300,
+   "montant_estime": 2900.0
+  },
+  {
+   "num_sinistre": "SIN-77512",
+   "num_contrat": "SAN-222431",
+   "num_client": "C-10247",
+   "nature": "Soins dentaires",
+   "statut": "REFUSE",
+   "ouvert_il_y_a_jours": 80,
+   "montant_estime": 650.0
+  }
+ ]
+}

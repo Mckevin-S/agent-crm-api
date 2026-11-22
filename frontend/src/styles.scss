@@ -1,0 +1,169 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+// Palette d'accent « Relais » (bleu-vert) déclinée pour Angular Material
+$relais-accent: (
+  50: #e6f4f3, 100: #c0e4e1, 200: #96d2cd, 300: #6cbfb9, 400: #3faaa3, 500: #0e7c7b, 600: #0c6f6e,
+  700: #0a5f5e, 800: #084f4e, 900: #053635,
+  contrast: (50: #1b1d2a, 100: #1b1d2a, 200: #1b1d2a, 300: #1b1d2a, 400: #fff, 500: #fff, 600: #fff,
+    700: #fff, 800: #fff, 900: #fff),
+);
+$relais-ink: (
+  50: #eef0f6, 100: #d5d8e6, 200: #b9bdd3, 300: #9ca1bf, 400: #868cb0, 500: #6f76a1, 600: #5c628a,
+  700: #474c6c, 800: #33374f, 900: #1b1d2a,
+  contrast: (50: #1b1d2a, 100: #1b1d2a, 200: #1b1d2a, 300: #1b1d2a, 400: #fff, 500: #fff, 600: #fff,
+    700: #fff, 800: #fff, 900: #fff),
+);
+
+$primary: mat.define-palette($relais-accent, 500);
+$accent: mat.define-palette($relais-ink, 700);
+$warn: mat.define-palette(mat.$red-palette, 600);
+$typography: mat.define-typography-config($font-family: "'Inter Variable', system-ui, sans-serif");
+
+$light-theme: mat.define-light-theme((
+  color: (primary: $primary, accent: $accent, warn: $warn),
+  typography: $typography,
+  density: -1,
+));
+$dark-theme: mat.define-dark-theme((
+  color: (primary: mat.define-palette($relais-accent, 400), accent: mat.define-palette($relais-ink, 200), warn: $warn),
+  typography: $typography,
+  density: -1,
+));
+
+@include mat.all-component-themes($light-theme);
+
+.dark-theme {
+  @include mat.all-component-colors($dark-theme);
+}
+
+// Jetons de design utilisés par les composants
+:root {
+  --bg: #f4f6f8;
+  --surface: #ffffff;
+  --surface-2: #eef1f4;
+  --sidebar: #0f1b2d;
+  --sidebar-ink: #b8c3d4;
+  --sidebar-active: rgba(255, 255, 255, 0.08);
+  --ink: #14202e;
+  --ink-soft: #34414f;
+  --muted: #66717f;
+  --border: #e1e6eb;
+  --border-strong: #c6ced8;
+  --accent: #0e7c7b;
+  --accent-soft: #e3f3f2;
+  --danger: #e5484d;
+  --warning: #f08c00;
+  --info: #2f6feb;
+  --success: #1f9d63;
+  --type-story: #1f9d63;
+  --type-bug: #e5484d;
+  --type-task: #2f6feb;
+  --status-todo: #5f6577;
+  --status-todo-bg: #eceef3;
+  --status-progress: #1d5bd6;
+  --status-progress-bg: #e3ecfd;
+  --status-review: #7442e0;
+  --status-review-bg: #efe7fd;
+  --status-done: #16804f;
+  --status-done-bg: #e0f4ea;
+  --shadow-sm: 0 1px 2px rgba(27, 29, 42, 0.06), 0 1px 1px rgba(27, 29, 42, 0.04);
+  --shadow-md: 0 8px 24px rgba(27, 29, 42, 0.08);
+  --radius: 12px;
+  color-scheme: light;
+}
+
+.dark-theme {
+  --bg: #0c131c;
+  --surface: #142030;
+  --surface-2: #1c2a3c;
+  --sidebar: #08101a;
+  --sidebar-ink: #a9acc2;
+  --ink: #eceef5;
+  --ink-soft: #c7cad8;
+  --muted: #9095ab;
+  --border: #24344a;
+  --border-strong: #34475f;
+  --accent: #2bb3a8;
+  --accent-soft: rgba(43, 179, 168, 0.15);
+  --status-todo: #aab0c2;
+  --status-todo-bg: rgba(170, 176, 194, 0.14);
+  --status-progress: #7aa5ff;
+  --status-progress-bg: rgba(122, 165, 255, 0.14);
+  --status-review: #b79bff;
+  --status-review-bg: rgba(183, 155, 255, 0.14);
+  --status-done: #4fd19a;
+  --status-done-bg: rgba(79, 209, 154, 0.14);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.45);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  font-family: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.2s ease;
+}
+
+h1, h2, h3, h4 { letter-spacing: -0.015em; color: var(--ink); }
+
+a { color: var(--accent); }
+
+// Blocs réutilisables
+.page { padding: 28px 32px 48px; max-width: 1400px; margin: 0 auto; }
+.page-header { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; }
+.page-header h1 { margin: 0; font-size: 24px; font-weight: 700; }
+.page-header p { margin: 4px 0 0; color: var(--muted); }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-sm); }
+.card-title { font-size: 13px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin: 0 0 12px; }
+.muted { color: var(--muted); }
+.mono { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; }
+.spacer { flex: 1; }
+.row { display: flex; align-items: center; gap: 8px; }
+.issue-key { font-size: 12px; font-weight: 600; color: var(--muted); letter-spacing: 0.02em; }
+
+// Ajustements Angular Material
+.mat-mdc-button-base, .mdc-tab__text-label, .mat-mdc-select, .mat-mdc-form-field, .mat-mdc-option,
+.mat-mdc-menu-item, .mat-mdc-input-element, .mdc-button__label { letter-spacing: normal !important; }
+.mat-mdc-select-value-text app-priority-icon, .mat-mdc-option app-priority-icon { vertical-align: middle; margin-right: 4px; }
+.mat-mdc-dialog-container .mdc-dialog__surface { border-radius: 16px !important; }
+.mat-mdc-snack-bar-container.snack-error { --mdc-snackbar-container-color: #b42318; --mdc-snackbar-supporting-text-color: #fff; }
+.mat-mdc-snack-bar-container.snack-success { --mdc-snackbar-container-color: #146c43; --mdc-snackbar-supporting-text-color: #fff; }
+.mat-mdc-form-field { width: 100%; }
+.dark-theme .mat-mdc-dialog-container .mdc-dialog__surface { background: var(--surface); }
+
+// Barre de défilement discrète
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 10px; border: 2px solid var(--bg); }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+// Priorités et états métier
+:root {
+  --prio-high: #c2410c;
+  --prio-high-bg: #ffedd5;
+  --prio-medium: #1d5bd6;
+  --prio-medium-bg: #e3ecfd;
+  --prio-low: #5f6577;
+  --prio-low-bg: #eceef3;
+}
+.dark-theme {
+  --prio-high: #fb923c;
+  --prio-high-bg: rgba(251, 146, 60, 0.15);
+  --prio-medium: #7aa5ff;
+  --prio-medium-bg: rgba(122, 165, 255, 0.14);
+  --prio-low: #aab0c2;
+  --prio-low-bg: rgba(170, 176, 194, 0.14);
+}
