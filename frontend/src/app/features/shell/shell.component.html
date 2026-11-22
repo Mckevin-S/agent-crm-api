@@ -1,0 +1,67 @@
+<div class="shell">
+  <aside class="sidebar">
+    <a routerLink="/accueil" class="home" aria-label="Tableau de bord"><app-logo /></a>
+    <nav aria-label="Navigation principale">
+      @for (item of nav; track item.path) {
+        @if (!item.managerOnly || auth.isManager()) {
+          <a [routerLink]="item.path" routerLinkActive="active" class="nav-item" [attr.data-testid]="'nav-' + item.path">
+            <mat-icon>{{ item.icon }}</mat-icon><span>{{ item.label }}</span>
+          </a>
+        }
+      }
+    </nav>
+    <div class="sidebar-foot">
+      <button class="nav-item" (click)="theme.toggle()">
+        <mat-icon>{{ theme.theme() === 'dark' ? 'light_mode' : 'dark_mode' }}</mat-icon>
+        <span>{{ theme.theme() === 'dark' ? 'Thème clair' : 'Thème sombre' }}</span>
+      </button>
+      <button class="user" [matMenuTriggerFor]="userMenu" aria-label="Mon compte">
+        <app-avatar [person]="auth.user()" [size]="32" />
+        <span class="who"><strong>{{ auth.user()?.fullName }}</strong>
+          <small>{{ auth.isManager() ? "Manager d'agence" : 'Conseiller' }}</small></span>
+      </button>
+      <mat-menu #userMenu="matMenu">
+        <div class="menu-user">{{ auth.user()?.email }}</div>
+        <button mat-menu-item (click)="auth.logout()"><mat-icon>logout</mat-icon>Se déconnecter</button>
+      </mat-menu>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <form class="search" (ngSubmit)="submitSearch()" role="search">
+        <mat-icon>search</mat-icon>
+        <input [formControl]="search" [matAutocomplete]="auto" placeholder="Rechercher un client (nom, n° client, e-mail)"
+               aria-label="Rechercher un client" data-testid="global-search" />
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="open($event)">
+          @for (s of suggestions(); track s.customer.id) {
+            <mat-option [value]="s.customer.id">
+              <span class="opt"><strong>{{ s.customer.fullName }}</strong>
+                <span class="muted">{{ s.customer.id }} · {{ s.customer.city }}</span></span>
+            </mat-option>
+          }
+        </mat-autocomplete>
+      </form>
+      <span class="spacer"></span>
+
+      <button class="crm" [class.down]="crm.degraded()" [matMenuTriggerFor]="crmMenu" data-testid="crm-status"
+              [attr.aria-label]="crm.degraded() ? 'CRM indisponible, mode dégradé' : 'CRM connecté'">
+        <span class="pulse"></span>{{ crm.degraded() ? 'Mode dégradé' : 'CRM connecté' }}
+      </button>
+      <mat-menu #crmMenu="matMenu" xPosition="before">
+        <div class="crm-panel" (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()" tabindex="-1">
+          <strong>Connexion au CRM</strong>
+          <p class="muted">Disjoncteur : {{ crm.state()?.circuitState ?? 'inconnu' }}</p>
+          <p class="muted small">Si le CRM ne répond plus, Relais affiche la dernière copie connue de chaque client.</p>
+          @if (auth.isManager()) {
+            <mat-slide-toggle [checked]="crm.state()?.outageSimulated ?? false" [disabled]="togglingOutage()"
+                              (change)="toggleOutage($event.checked)" data-testid="outage-toggle">
+              Simuler une panne du CRM
+            </mat-slide-toggle>
+          }
+        </div>
+      </mat-menu>
+    </header>
+    <router-outlet />
+  </div>
+</div>
