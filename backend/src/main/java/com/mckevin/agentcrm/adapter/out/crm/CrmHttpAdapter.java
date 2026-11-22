@@ -50,6 +50,9 @@ class CrmHttpAdapter implements CrmGateway, CrmStatusProvider {
         this.circuitBreaker = circuitBreakers.circuitBreaker(RESILIENCE_NAME);
         this.retry = retries.retry(RESILIENCE_NAME);
         this.clock = clock;
+        // Disjoncteur réarmé (fin d'une panne simulée) : l'échec précédent n'est plus d'actualité.
+        // Si le CRM est toujours en panne, le prochain appel enregistrera un nouvel échec.
+        this.circuitBreaker.getEventPublisher().onReset(event -> lastFailure.set(null));
     }
 
     @Override
