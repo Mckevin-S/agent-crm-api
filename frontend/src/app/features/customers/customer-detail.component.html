@@ -1,0 +1,161 @@
+<div class="page">
+  <a routerLink="/clients" class="back"><mat-icon>arrow_back</mat-icon> Clients</a>
+
+  @if (view(); as v) {
+    @if (!v.live) {
+      <app-degraded-banner [fetchedAt]="v.fetchedAt" />
+    }
+    <header class="card identity">
+      <app-avatar [person]="v.customer" [size]="64" />
+      <div class="who">
+        <div class="row">
+          <h1>{{ v.customer.title }} {{ v.customer.fullName }}</h1>
+          <span class="segment" [class.pro]="v.customer.segment === 'PROFESSIONAL'">{{ v.customer.segmentLabel }}</span>
+        </div>
+        <p class="muted">
+          <span class="mono">{{ v.customer.id }}</span>
+          @if (v.kpis.age) {
+            · {{ v.kpis.age }} ans
+          }
+          · {{ v.customer.city }} · client depuis {{ v.kpis.seniorityYears }} an{{ v.kpis.seniorityYears > 1 ? 's' : '' }}
+        </p>
+        <p class="contact">
+          @if (v.customer.phone) {
+            <span><mat-icon>call</mat-icon>{{ v.customer.phone }}</span>
+          }
+          @if (v.customer.email) {
+            <span><mat-icon>mail</mat-icon>{{ v.customer.email }}</span>
+          }
+          <span><mat-icon>badge</mat-icon>Conseiller : {{ v.advisorName ?? '–' }}</span>
+        </p>
+      </div>
+      <div class="actions">
+        <button mat-flat-button color="primary" (click)="logInteraction()" data-testid="log-interaction">
+          <mat-icon>add_comment</mat-icon> Tracer un échange
+        </button>
+        <button mat-stroked-button (click)="newTask()" data-testid="new-task"><mat-icon>add_task</mat-icon> Tâche</button>
+      </div>
+    </header>
+
+    <section class="kpis">
+      <div class="card kpi"><span class="label">Primes annuelles</span><span class="value">{{ v.kpis.annualPremium | money }}</span></div>
+      <div class="card kpi"><span class="label">Contrats en vigueur</span><span class="value">{{ v.kpis.activeContracts }}</span></div>
+      <div class="card kpi"><span class="label">Sinistres en cours</span><span class="value">{{ v.kpis.pendingClaims }}</span></div>
+      <div class="card kpi"><span class="label">Tâches ouvertes</span><span class="value">{{ v.openTasks.length }}</span></div>
+    </section>
+
+    @if (busy()) {
+      <mat-progress-bar mode="indeterminate" />
+    }
+
+    <div class="grid">
+      <div class="col">
+        <section class="card panel">
+          <div class="panel-head"><h2>Recommandations</h2><span class="count">{{ v.recommendations.length }}</span></div>
+          <div class="stack">
+            @for (r of v.recommendations; track r.code + r.reference) {
+              <app-recommendation-card [recommendation]="r" [disabled]="busy()" (accepted)="accept(r)" (dismissed)="dismiss(r)" />
+            } @empty {
+              <p class="muted">Aucune action recommandée pour ce client.</p>
+            }
+          </div>
+        </section>
+
+        <section class="card panel">
+          <div class="panel-head"><h2>Contrats</h2><span class="count">{{ v.contracts.length }}</span></div>
+          @for (c of v.contracts; track c.number) {
+            <div class="contract" [class.inactive]="c.status !== 'ACTIVE'">
+              <span class="product"><mat-icon>{{ productIcons[c.product] }}</mat-icon></span>
+              <div class="body">
+                <strong>{{ c.label }}</strong>
+                <span class="muted small"><span class="mono">{{ c.number }}</span> · {{ c.productLabel }}
+                  · depuis le {{ c.startDate | date: 'd MMM yyyy' }}</span>
+              </div>
+              <div class="right">
+                <span [class]="'status ' + c.status.toLowerCase()">{{ c.statusLabel }}</span>
+                @if (c.status === 'ACTIVE') {
+                  <span class="small" [class.soon]="c.daysUntilRenewal <= 45">
+                    échéance {{ c.renewalDate | date: 'd MMM yyyy' }}
+                    @if (c.daysUntilRenewal <= 45) {
+                      (J-{{ c.daysUntilRenewal }})
+                    }
+                  </span>
+                }
+                <span class="premium">{{ c.annualPremium | money }} / an</span>
+              </div>
+            </div>
+          }
+        </section>
+
+        <section class="card panel">
+          <div class="panel-head"><h2>Sinistres</h2><span class="count">{{ v.claims.length }}</span></div>
+          @for (s of v.claims; track s.number) {
+            <div class="claim">
+              <mat-icon [class.pending]="s.pending">{{ s.pending ? 'report' : 'task_alt' }}</mat-icon>
+              <div class="body">
+                <strong>{{ s.nature }}</strong>
+                <span class="muted small"><span class="mono">{{ s.number }}</span> · contrat {{ s.contractNumber }}
+                  · ouvert le {{ s.openedOn | date: 'd MMM yyyy' }} ({{ s.ageInDays }} j)</span>
+              </div>
+              <span class="small">{{ s.estimatedAmount | money }}</span>
+              <span [class]="'status ' + (s.pending ? 'suspended' : 'active')">{{ s.statusLabel }}</span>
+            </div>
+          } @empty {
+            <p class="muted">Aucun sinistre déclaré.</p>
+          }
+        </section>
+      </div>
+
+      <div class="col">
+        <section class="card panel">
+          <div class="panel-head"><h2>Tâches</h2>
+            <button mat-button (click)="newTask()"><mat-icon>add</mat-icon> Ajouter</button></div>
+          @for (t of v.openTasks; track t.id) {
+            <app-task-row [task]="t" [showCustomer]="false" (completed)="complete($event)" (rescheduled)="reschedule($event)" />
+          } @empty {
+            <p class="muted">Aucune tâche ouverte.</p>
+          }
+          @if (v.closedTasks.length) {
+            <details class="closed">
+              <summary>{{ v.closedTasks.length }} tâche(s) terminée(s)</summary>
+              @for (t of v.closedTasks; track t.id) {
+                <app-task-row [task]="t" [showCustomer]="false" />
+              }
+            </details>
+          }
+        </section>
+
+        <section class="card panel">
+          <div class="panel-head"><h2>Historique des échanges</h2>
+            <button mat-button (click)="logInteraction()"><mat-icon>add</mat-icon> Tracer</button></div>
+          <ol class="timeline">
+            @for (i of v.interactions; track i.id) {
+              <li>
+                <span class="icon" [class.in]="i.direction === 'INBOUND'"><mat-icon>{{ channelIcons[i.channel] }}</mat-icon></span>
+                <div>
+                  <strong>{{ i.subject }}</strong>
+                  <span class="muted small">{{ i.channelLabel }} {{ i.direction === 'INBOUND' ? 'entrant' : 'sortant' }}
+                    · {{ i.agentName }} · <span [matTooltip]="(i.occurredAt | date: 'dd/MM/yyyy HH:mm') ?? ''">{{ i.occurredAt | relativeTime }}</span></span>
+                  @if (i.notes) {
+                    <p>{{ i.notes }}</p>
+                  }
+                </div>
+              </li>
+            } @empty {
+              <li class="muted">Aucun échange enregistré.</li>
+            }
+          </ol>
+        </section>
+      </div>
+    </div>
+  } @else if (error()) {
+    <div class="card">
+      <app-empty-state [icon]="error()!.forbidden ? 'lock' : 'cloud_off'" [title]="error()!.forbidden ? 'Accès refusé' : 'Fiche indisponible'"
+                       [message]="error()!.message">
+        <a mat-stroked-button routerLink="/clients">Retour aux clients</a>
+      </app-empty-state>
+    </div>
+  } @else {
+    <mat-progress-bar mode="indeterminate" />
+  }
+</div>

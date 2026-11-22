@@ -1,0 +1,73 @@
+<div class="page">
+  <div class="page-header">
+    <div>
+      <h1>{{ greeting() }} {{ firstName() }}</h1>
+      <p>{{ auth.isManager() ? "Vue d'ensemble de l'agence" : 'Votre portefeuille' }} et les actions qui comptent aujourd'hui.</p>
+    </div>
+    <a mat-stroked-button routerLink="/clients"><mat-icon>groups</mat-icon> Tous les clients</a>
+  </div>
+
+  @if (dashboard(); as d) {
+    @if (!d.live) {
+      <app-degraded-banner />
+    }
+    <section class="kpis" aria-label="Indicateurs du portefeuille">
+      <div class="card kpi accent">
+        <span class="label">Clients</span>
+        <span class="value">{{ d.customers }}</span>
+        <span class="hint">{{ d.annualPremium | money }} de primes annuelles</span>
+      </div>
+      <div class="card kpi">
+        <span class="label">Renouvellements à 30 jours</span>
+        <span class="value">{{ d.renewalsNext30Days }}</span>
+        <span class="hint">contrats arrivant à échéance</span>
+      </div>
+      <div class="card kpi">
+        <span class="label">Sinistres en cours</span>
+        <span class="value">{{ d.pendingClaims }}</span>
+        <span class="hint">à suivre avec les clients</span>
+      </div>
+      <div class="card kpi" [class.alert]="d.overdueTasks > 0">
+        <span class="label">Tâches</span>
+        <span class="value">{{ d.openTasks }}</span>
+        <span class="hint">{{ d.overdueTasks }} en retard · {{ d.dueToday }} pour aujourd'hui</span>
+      </div>
+    </section>
+
+    <div class="grid">
+      <section class="card panel">
+        <div class="panel-head">
+          <h2>Actions recommandées</h2>
+          <span class="muted small">triées par priorité</span>
+        </div>
+        @if (busy()) {
+          <mat-progress-bar mode="indeterminate" />
+        }
+        <div class="recos">
+          @for (item of d.recommendations; track item.customerId + item.recommendation.code + item.recommendation.reference) {
+            <app-recommendation-card [recommendation]="item.recommendation" [customerId]="item.customerId"
+                                     [customerName]="item.customerName" [disabled]="busy()"
+                                     (accepted)="accept(item)" (dismissed)="dismiss(item)" />
+          } @empty {
+            <app-empty-state icon="verified" title="Rien à signaler"
+                             message="Aucune action recommandée pour l'instant : votre portefeuille est à jour." />
+          }
+        </div>
+      </section>
+
+      <section class="card panel">
+        <div class="panel-head">
+          <h2>Tâches des 7 prochains jours</h2>
+          <a routerLink="/taches" class="link">Toutes les tâches</a>
+        </div>
+        @for (t of d.upcomingTasks; track t.id) {
+          <app-task-row [task]="t" (completed)="complete($event)" (rescheduled)="reschedule($event)" />
+        } @empty {
+          <p class="muted">Aucune tâche à venir.</p>
+        }
+      </section>
+    </div>
+  } @else {
+    <mat-progress-bar mode="indeterminate" />
+  }
+</div>
