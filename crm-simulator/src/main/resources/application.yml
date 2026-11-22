@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: crm-simulator
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+    default-property-inclusion: non_null
+server:
+  port: ${PORT:8090}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
