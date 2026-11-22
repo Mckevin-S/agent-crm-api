@@ -68,7 +68,7 @@ public final class ApiDtos {
         static CustomerDto of(Customer c) {
             return new CustomerDto(c.id().value(), c.title(), c.firstName(), c.lastName(), c.fullName(), c.birthDate(),
                     c.email(), c.phone(), c.city(), c.postalCode(), c.segment().name(), c.segment().label(),
-                    c.customerSince(), initials(c.fullName()));
+                    c.customerSince(), ApiDtos.initials(c.fullName()));
         }
     }
 
