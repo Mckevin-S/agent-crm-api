@@ -35,12 +35,13 @@ class CrmHttpAdapterTest {
     private static final String BASE = "http://crm.test";
     private MockRestServiceServer server;
     private CrmHttpAdapter adapter;
+    private CircuitBreakerRegistry breakers;
 
     @BeforeEach
     void setUp() {
         RestClient.Builder builder = RestClient.builder().baseUrl(BASE);
         server = MockRestServiceServer.bindTo(builder).build();
-        CircuitBreakerRegistry breakers = CircuitBreakerRegistry.of(CircuitBreakerConfig.custom()
+        breakers = CircuitBreakerRegistry.of(CircuitBreakerConfig.custom()
                 .slidingWindowSize(4).minimumNumberOfCalls(2).failureRateThreshold(50)
                 .recordExceptions(HttpServerErrorException.class).build());
         RetryRegistry retries = RetryRegistry.of(RetryConfig.custom().maxAttempts(1).build());
@@ -94,6 +95,20 @@ class CrmHttpAdapterTest {
         assertThat(adapter.status().available()).isFalse();
         assertThat(adapter.status().circuitState()).isEqualTo("OPEN");
         server.verify();
+    }
+
+    @Test
+    void resettingTheCircuitMakesTheCrmAvailableAgain() {
+        server.expect(ExpectedCount.times(2), requestTo(BASE + "/crm/v1/clients?q=")).andRespond(withStatus(HttpStatus.SERVICE_UNAVAILABLE));
+        assertThatThrownBy(() -> adapter.search("")).isInstanceOf(CrmUnavailableException.class);
+        assertThatThrownBy(() -> adapter.search("")).isInstanceOf(CrmUnavailableException.class);
+        assertThat(adapter.status().available()).isFalse();
+
+        breakers.circuitBreaker(CrmHttpAdapter.RESILIENCE_NAME).reset();
+
+        assertThat(adapter.status().available()).isTrue();
+        assertThat(adapter.status().lastFailureAt()).isNull();
+        assertThat(adapter.status().circuitState()).isEqualTo("CLOSED");
     }
 
     @Test
